@@ -1,0 +1,1669 @@
+{
+  "name": "AI Productivity Toolkit — Sales Funnel",
+  "nodes": [
+    {
+      "parameters": {
+        "formTitle": "AI Productivity Toolkit — Free Preview",
+        "formDescription": "Explore practical AI structures for studying, planning, and student workflows. Submit your details to request the free preview.",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Name",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Email",
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "College Year",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "1st Year"
+                  },
+                  {
+                    "option": "2nd Year"
+                  },
+                  {
+                    "option": "3rd Year"
+                  },
+                  {
+                    "option": "Final Year"
+                  }
+                ]
+              },
+              "requiredField": true
+            },
+            {
+              "fieldLabel": "Biggest Productivity Challenge",
+              "fieldType": "dropdown",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Time Management"
+                  },
+                  {
+                    "option": "Lack of Focus"
+                  },
+                  {
+                    "option": "Overwhelm"
+                  },
+                  {
+                    "option": "Tool Confusion"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.formTrigger",
+      "typeVersion": 2.6,
+      "position": [
+        -16,
+        32
+      ],
+      "id": "8820039f-f75f-4cb7-8765-f7d66b13ad7b",
+      "name": "On form submission"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "bee9196e-67bb-4a43-b53a-0594c32836b9",
+              "name": "Timestamp",
+              "value": "={{ $now }}",
+              "type": "string"
+            },
+            {
+              "id": "a2f2c062-2f74-4536-9005-13aec45269f0",
+              "name": "Category",
+              "value": "={{ $json[\"Biggest Productivity Challenge\"] }}",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        192,
+        32
+      ],
+      "id": "ec48452f-98b8-4f89-b907-830f26c5fe93",
+      "name": "Prepare Student Data"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "autoMapInputData",
+          "value": {},
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        448,
+        32
+      ],
+      "id": "623b88fe-b2a6-4de2-b198-3f95fb579ddb",
+      "name": "Append row in sheet"
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json[\"Category\"] }}",
+                    "rightValue": "Time Management",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d0268bb8-d031-404b-af9a-4748cf30d128"
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "35749bca-ce78-4872-8048-e7eaf8b865c7",
+                    "leftValue": "={{ $json[\"Category\"] }}",
+                    "rightValue": "Lack of Focus",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "e24cfa1d-0c90-40ac-8add-80f725d26c6c",
+                    "leftValue": "={{ $json[\"Category\"] }}",
+                    "rightValue": "Overwhelm",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "id": "4d56bd3a-eaed-43a8-b2d3-67d4db919739",
+                    "leftValue": "={{ $json[\"Category\"] }}",
+                    "rightValue": "Tool Confusion",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              }
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        672,
+        0
+      ],
+      "id": "f62a4fc7-7864-49cf-9349-75a6c0fdcb25",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b5f032f1-db9d-493f-8071-b20655100646",
+              "name": "Response",
+              "value": "If time management is making it difficult to keep your study tasks organized, you can explore the toolkit's AI-assisted planning structures and study workflow systems as starting points for creating a more structured routine. You can review and adapt them to your own needs.",
+              "type": "string"
+            },
+            {
+              "id": "ce24f3aa-3393-43f5-87aa-f74d048c3073",
+              "name": "Action Taken",
+              "value": "Personalized email sent",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        896,
+        -288
+      ],
+      "id": "8b2253e6-a8b2-4281-9871-4df62ee3a502",
+      "name": "Response — Time Management"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "fcec7d8b-fa43-448f-bb77-c5ea249a0128",
+              "name": "Response",
+              "value": "If staying focused is making study tasks difficult to manage, the toolkit's study workflow systems can give you a structured starting point for organizing AI-supported study activities. You can review and adapt the structure to your own routine.",
+              "type": "string"
+            },
+            {
+              "id": "5d2e9535-0041-4fe5-92fc-e510ea954256",
+              "name": "Action Taken",
+              "value": "Personalized email sent",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        896,
+        -112
+      ],
+      "id": "f2e52e84-abd3-4485-ac59-00318b3193ff",
+      "name": "Response — Lack of Focus"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "f704a4df-51e0-42c7-8b22-c6d36849f9d4",
+              "name": "Response",
+              "value": "If your study tasks feel overwhelming, the toolkit brings together organized structures for studying, planning, and AI-supported workflows. You can start with the structures most relevant to your needs and adapt them to your own routine.",
+              "type": "string"
+            },
+            {
+              "id": "7ed35f4e-7c14-4dbd-982b-10e8e437f5f7",
+              "name": "Action Taken",
+              "value": "Personalized email sent",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        896,
+        48
+      ],
+      "id": "42b6e1b1-6ca4-4c4c-9a5b-ad4cdf71074a",
+      "name": "Response — Overwhelm"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "4853c656-60f1-4edb-bcfb-e69f4713741b",
+              "name": "Response",
+              "value": "If you're unsure which AI tools or prompts to use, the toolkit provides organized prompt templates and workflow structures that you can review as starting points. This gives you a structured place to begin instead of creating every setup from scratch.",
+              "type": "string"
+            },
+            {
+              "id": "6cb2cb1d-cc3c-481f-9179-b1068deee04b",
+              "name": "Action Taken",
+              "value": "Personalized email sent",
+              "type": "string"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.5,
+      "position": [
+        896,
+        208
+      ],
+      "id": "f35b3d54-c743-4f13-8bf8-bd78a52dc8d0",
+      "name": "Response — Tool Confusion"
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_SENDER_EMAIL@example.com",
+        "toEmail": "={{ $json[\"Email\"] }}",
+        "subject": "Your AI Productivity Toolkit Preview — Next Steps",
+        "html": "=<p>Hi {{ $json[\"Name\"] }},</p>\n\n<p>{{ $json[\"Response\"] }}</p>\n\n<p>Thanks,<br>\nAI Productivity Toolkit Team</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        -288
+      ],
+      "id": "06bd9166-a464-4db0-a07c-64223b94797b",
+      "name": "Send an Email"
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_SENDER_EMAIL@example.com",
+        "toEmail": "={{ $json[\"Email\"] }}",
+        "subject": "Your AI Productivity Toolkit Preview — Next Steps",
+        "html": "=<p>Hi {{ $json[\"Name\"] }},</p>\n\n<p>{{ $json[\"Response\"] }}</p>\n\n<p>Thanks,<br>\nAI Productivity Toolkit Team</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        -112
+      ],
+      "id": "ebf47238-4374-4f15-8be5-4834f352bbca",
+      "name": "Send an Email1"
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_SENDER_EMAIL@example.com",
+        "toEmail": "={{ $json[\"Email\"] }}",
+        "subject": "Your AI Productivity Toolkit Preview — Next Steps",
+        "html": "=<p>Hi {{ $json[\"Name\"] }},</p>\n\n<p>{{ $json[\"Response\"] }}</p>\n\n<p>Thanks,<br>\nAI Productivity Toolkit Team</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        48
+      ],
+      "id": "ac8a4194-416a-4fa4-913c-6f64a8b29dae",
+      "name": "Send an Email2"
+    },
+    {
+      "parameters": {
+        "fromEmail": "YOUR_SENDER_EMAIL@example.com",
+        "toEmail": "={{ $json[\"Email\"] }}",
+        "subject": "Your AI Productivity Toolkit Preview — Next Steps",
+        "html": "=<p>Hi {{ $json[\"Name\"] }},</p>\n\n<p>{{ $json[\"Response\"] }}</p>\n\n<p>Thanks,<br>\nAI Productivity Toolkit Team</p>",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.emailSend",
+      "typeVersion": 2.1,
+      "position": [
+        1120,
+        208
+      ],
+      "id": "257df920-5744-4552-bc18-0440bcfe0b1a",
+      "name": "Send an Email3"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Action Log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json[\"Name\"] }}",
+            "Email": "={{ $json[\"Email\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Action Taken": "Personalized email sent",
+            "Timestamp": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Action Taken",
+              "displayName": "Action Taken",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        -288
+      ],
+      "id": "bda46e58-cbea-4fed-896d-3e8d5b0a2aea",
+      "name": "Append row in sheet1"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Action Log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json[\"Name\"] }}",
+            "Email": "={{ $json[\"Email\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Action Taken": "Personalized email sent",
+            "Timestamp": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Action Taken",
+              "displayName": "Action Taken",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        -112
+      ],
+      "id": "3377a667-7921-4fbc-a7ff-4c74d4649348",
+      "name": "Append row in sheet2"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Action Log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Name": "={{ $json[\"Name\"] }}",
+            "Email": "={{ $json[\"Email\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Action Taken": "Personalized email sent",
+            "Timestamp": "={{ $now }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Action Taken",
+              "displayName": "Action Taken",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        48
+      ],
+      "id": "b8af9a0c-ec60-48e3-bc85-219bf4c0b103",
+      "name": "Append row in sheet3"
+    },
+    {
+      "parameters": {
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Action Log"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Timestamp": "={{ $now }}",
+            "Action Taken": "Personalized email sent",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Email": "={{ $json[\"Email\"] }}",
+            "Name": "={{ $json[\"Name\"] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Action Taken",
+              "displayName": "Action Taken",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1568,
+        208
+      ],
+      "id": "aea921d1-aca8-4b7b-923a-3787d1419bad",
+      "name": "Append row in sheet4"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json[\"Email\"] }}",
+            "Name": "={{ $json[\"Name\"] }}",
+            "College Year": "={{ $json[\"College Year\"] }}",
+            "Biggest Productivity Challenge": "={{ $json[\"Biggest Productivity Challenge\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Response": "={{ $json[\"Response\"] }}",
+            "Timestamp": "={{ $json[\"Timestamp\"] }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "submittedAt",
+              "displayName": "submittedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "formMode",
+              "displayName": "formMode",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1328,
+        -288
+      ],
+      "id": "489b2cf0-c652-4e91-9a3d-16c4ebc357c1",
+      "name": "Append or update row in sheet"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json[\"Email\"] }}",
+            "Name": "={{ $json[\"Name\"] }}",
+            "College Year": "= {{ $json[\"College Year\"] }}",
+            "Biggest Productivity Challenge": "={{ $json[\"Biggest Productivity Challenge\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Response": "={{ $json[\"Response\"] }}",
+            "Timestamp": "={{ $json[\"Timestamp\"] }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        -112
+      ],
+      "id": "cff2bd65-3e03-4244-8c84-b70b36477378",
+      "name": "Append or update row in sheet1"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json[\"Email\"] }}",
+            "Name": "={{ $json[\"Name\"] }}",
+            "College Year": "={{ $json[\"College Year\"] }}",
+            "Biggest Productivity Challenge": "={{ $json[\"Biggest Productivity Challenge\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Response": "={{ $json[\"Response\"] }}",
+            "Timestamp": "={{ $json[\"Timestamp\"] }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        48
+      ],
+      "id": "aa5e7165-f425-46b3-9cb0-0ebecf4b54b4",
+      "name": "Append or update row in sheet2"
+    },
+    {
+      "parameters": {
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_GOOGLE_SHEET_ID",
+          "mode": "list",
+          "cachedResultName": "AI Productivity Toolkit — Leads"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "REPLACE_WITH_YOUR_SHEET_NAME_OR_GID",
+          "mode": "list",
+          "cachedResultName": "Leads"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Email": "={{ $json[\"Email\"] }}",
+            "Name": "={{ $json[\"Name\"] }}",
+            "College Year": "={{ $json[\"College Year\"] }}",
+            "Biggest Productivity Challenge": "={{ $json[\"Biggest Productivity Challenge\"] }}",
+            "Category": "={{ $json[\"Category\"] }}",
+            "Response": "={{ $json[\"Response\"] }}",
+            "Timestamp": "={{ $json[\"Timestamp\"] }}"
+          },
+          "matchingColumns": [
+            "Email"
+          ],
+          "schema": [
+            {
+              "id": "Name",
+              "displayName": "Name",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "College Year",
+              "displayName": "College Year",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Biggest Productivity Challenge",
+              "displayName": "Biggest Productivity Challenge",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Category",
+              "displayName": "Category",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Response",
+              "displayName": "Response",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Timestamp",
+              "displayName": "Timestamp",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4.7,
+      "position": [
+        1344,
+        208
+      ],
+      "id": "ac567d45-1329-4cf3-bd78-0587399e4296",
+      "name": "Append or update row in sheet3"
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "On form submission": {
+      "main": [
+        [
+          {
+            "node": "Prepare Student Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Student Data": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Response — Time Management",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response — Lack of Focus",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response — Overwhelm",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Response — Tool Confusion",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response — Time Management": {
+      "main": [
+        [
+          {
+            "node": "Send an Email",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response — Lack of Focus": {
+      "main": [
+        [
+          {
+            "node": "Send an Email1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response — Overwhelm": {
+      "main": [
+        [
+          {
+            "node": "Send an Email2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Response — Tool Confusion": {
+      "main": [
+        [
+          {
+            "node": "Send an Email3",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Append or update row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send an Email": {
+      "main": [
+        []
+      ]
+    },
+    "Send an Email1": {
+      "main": [
+        []
+      ]
+    },
+    "Send an Email2": {
+      "main": [
+        []
+      ]
+    },
+    "Send an Email3": {
+      "main": [
+        []
+      ]
+    },
+    "Append or update row in sheet": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet1": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet2": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet3",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Append or update row in sheet3": {
+      "main": [
+        [
+          {
+            "node": "Append row in sheet4",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "meta": {},
+  "tags": []
+}
